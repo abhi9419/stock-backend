@@ -17,11 +17,8 @@ class SymbolController extends Controller
     public function index()
     {
         $symbol = new Symbol();
-
         $all = $symbol::all();
-
         return response()->json(["status" => "success", "data" => $all]);
-
     }
 
 

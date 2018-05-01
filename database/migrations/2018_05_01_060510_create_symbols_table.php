@@ -16,9 +16,11 @@ class CreateSymbolsTable extends Migration
         Schema::create('symbols', function (Blueprint $table) {
             $table->increments('id');
             $table->string('symbol',50);
+            $table->string('alphavantage_symbol',50);
             $table->string('series',3);
             $table->string('isin',30);
             $table->unique('symbol');
+            $table->unique('alphavantage_symbol');
             $table->timestamps();
         });
     }

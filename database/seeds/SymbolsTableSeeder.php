@@ -32,6 +32,7 @@ class SymbolsTableSeeder extends Seeder
                     $symbol->symbol = $data [0];
                     $symbol->series = $data [1];
                     $symbol->isin = $data [2];
+                    $symbol->alphavantage_symbol = $data[3];
                     $symbol->save();
                 }
             }
