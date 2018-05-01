@@ -21,3 +21,5 @@ Route::get('/symbols', 'SymbolController@index');
 
 Route::get('/symbol/fetch/{symbol}', 'OhlcValueController@create');
 
+Route::get('/symbol/current/{symbol}', 'OhlcValueController@current');
+
