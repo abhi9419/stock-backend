@@ -23,3 +23,9 @@ Route::get('/symbol/fetch/{symbol}', 'OhlcValueController@create');
 
 Route::get('/symbol/current/{symbol}', 'OhlcValueController@current');
 
+Route::get('/symbol/recent2/{symbol}', 'OhlcValueController@recent2');
+
+
+Route::get('/symbol/graph-data/{symbol}', 'OhlcValueController@getOhlcDataForGraph');
+
+

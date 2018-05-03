@@ -35,6 +35,23 @@ class OhlcValueController extends Controller
 
     }
 
+    public function recent2($symbol){
+
+        $ohlc = new OhlcValue();
+        $currentValues = $ohlc->getCurrentValue($symbol);
+        $secondLastValue = $ohlc->getSecondLastValue($symbol);
+
+        if(!empty($currentValues)){
+
+            return response()->json(['status' => 'success', 'data' => array('0'=>$currentValues[0],'1'=>$secondLastValue[0])]);
+
+        }
+
+        return response()->json(['status' => 'error', 'message' => 'No Data']);
+
+
+    }
+
     public function create($symbol)
     {
         $symbolColumnName = '';
@@ -117,6 +134,39 @@ class OhlcValueController extends Controller
         }catch (\Exception $e){
             return false;
         }
+
+    }
+
+    function getOhlcDataForGraph($symbol){
+
+        $ohlc = new OhlcValue();
+        $currentValues = $ohlc->getAllValue($symbol);
+
+        if(!empty($currentValues)){
+
+
+            $open = array("key"=>"Open","values"=>array());
+            $high = ["key"=>"High","values"=>[]];
+            $low = ["key"=>"Low","values"=>[]];
+            $close = ["key"=>"Close","values"=>[]];
+
+            foreach ($currentValues as $cv){
+
+                $cv->timestamp = strtotime($cv->timestamp);
+
+                array_push($open['values'],array($cv->timestamp,$cv->open));
+                array_push($high['values'],array($cv->timestamp,$cv->high));
+                array_push($low['values'],array($cv->timestamp,$cv->low));
+                array_push($close['values'],array($cv->timestamp,$cv->close));
+
+            }
+
+
+            return response()->json(['status' => 'success', 'data' => array($open,$high,$low,$close)]);
+
+        }
+
+        return response()->json(['status' => 'error', 'message' => 'No Data']);
 
     }
 
