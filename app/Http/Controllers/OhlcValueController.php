@@ -74,7 +74,7 @@ class OhlcValueController extends Controller
         $symbolName = $symbolMeta['api_symbol'];
         $symbolId = $symbolMeta['id'];
 
-        $symbolData = $apiClass->daily($symbolName, "csv", "compact");
+        $symbolData = $apiClass->daily($symbolName, "csv", "full");
 
         $symbolData = $this->processDailyApiData($symbolData);
 

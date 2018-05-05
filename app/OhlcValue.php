@@ -54,7 +54,7 @@ class OhlcValue extends Model
         $queryResult = DB::select(DB::raw("
                     SELECT ohlc.open,ohlc.high,ohlc.low,ohlc.close,ohlc.volume,ohlc.timestamp 
                     from ohlc_values ohlc join symbols s on s.id = ohlc.symbol_id where s.symbol = '$symbol'
-                    order by ohlc.timestamp desc limit 10
+                    order by ohlc.timestamp asc
         "));
 
 
